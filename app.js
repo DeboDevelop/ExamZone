@@ -10,10 +10,19 @@ const mongoose = require("mongoose");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
+let DATABASE_URL;
+
+if (process.env.mode == "development" || process.env.mode == "production") {
+  console.log("Working Man");
+  DATABASE_URL = require("./keys").mongoURI;
+} else {
+  DATABASE_URL = process.env.DATABASE_URL;
+}
+
 var app = express();
 
 //Database Connection
-mongoose.connect(process.env.DATABASE_URL, {
+mongoose.connect(DATABASE_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
