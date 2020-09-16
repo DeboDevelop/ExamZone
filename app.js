@@ -13,7 +13,6 @@ var usersRouter = require("./routes/users");
 let DATABASE_URL;
 
 if (process.env.mode == "development" || process.env.mode == "production") {
-  console.log("Working Man");
   DATABASE_URL = require("./keys").mongoURI;
 } else {
   DATABASE_URL = process.env.DATABASE_URL;
