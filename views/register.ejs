@@ -6,11 +6,17 @@
     <title>User Register</title>
   </head>
   <body>
+    <h1>Register</h1>
+    <div>
+      <% if(typeof errors != 'undefined'){ %> <% errors.forEach(function(error)
+      { %> <%= error.msg %> <br />
+      <% }); %> <% } %>
+    </div>
     <div>
       <form action="/users/register" method="POST">
         <div>
           <label for="name">Name</label>
-          <input type="name" id="name" name="name" placeholder="Enter Name" />
+          <input type="text" id="name" name="name" placeholder="Enter Name" />
         </div>
         <div>
           <label for="email">Email</label>
@@ -37,6 +43,24 @@
             id="password2"
             name="password2"
             placeholder="Confirm Password"
+          />
+        </div>
+        <div>
+          <label for="roll_no">Roll No</label>
+          <input
+            type="text"
+            id="roll_no"
+            name="roll_no"
+            placeholder="Enter Roll No."
+          />
+        </div>
+        <div>
+          <label for="course">Course</label>
+          <input
+            type="text"
+            id="course"
+            name="course"
+            placeholder="Enter Course"
           />
         </div>
         <button type="submit">Register</button>
