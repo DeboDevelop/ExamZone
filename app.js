@@ -6,6 +6,9 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var expressLayouts = require("express-ejs-layouts");
 const mongoose = require("mongoose");
+const flash = require("connect-flash");
+const session = require("express-session");
+const passport = require("passport");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -19,6 +22,9 @@ if (process.env.mode == "development" || process.env.mode == "production") {
 }
 
 var app = express();
+
+// Passport Config
+require("./config/passport")(passport);
 
 //Database Connection
 mongoose.connect(DATABASE_URL, {
@@ -38,6 +44,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "dist")));
+
+// Express session
+app.use(
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Connect flash
+app.use(flash());
 
 app.use(expressLayouts);
 app.use("/", indexRouter);
