@@ -16,9 +16,9 @@ var usersRouter = require("./routes/users");
 let DATABASE_URL;
 
 if (process.env.mode == "development" || process.env.mode == "production") {
-  DATABASE_URL = require("./keys").mongoURI;
+	DATABASE_URL = require("./keys").mongoURI;
 } else {
-  DATABASE_URL = process.env.DATABASE_URL;
+	DATABASE_URL = process.env.DATABASE_URL;
 }
 
 var app = express();
@@ -28,8 +28,8 @@ require("./config/passport")(passport);
 
 //Database Connection
 mongoose.connect(DATABASE_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+	useNewUrlParser: true,
+	useUnifiedTopology: true
 });
 const db = mongoose.connection;
 db.on("error", error => console.error(error));
@@ -47,11 +47,11 @@ app.use(express.static(path.join(__dirname, "dist")));
 
 // Express session
 app.use(
-  session({
-    secret: "secret",
-    resave: true,
-    saveUninitialized: true,
-  })
+	session({
+		secret: "secret",
+		resave: true,
+		saveUninitialized: true
+	})
 );
 
 // Passport middleware
@@ -60,6 +60,14 @@ app.use(passport.session());
 
 // Connect flash
 app.use(flash());
+
+// Global vars
+app.use((req, res, next) => {
+	res.locals.success_msg = req.flash("success_msg");
+	res.locals.error_msg = req.flash("error_msg");
+	res.locals.error = req.flash("error");
+	next();
+});
 
 app.use(expressLayouts);
 app.use("/", indexRouter);
