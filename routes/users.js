@@ -24,10 +24,10 @@ router.get("/dashboard", ensureAuthenticated, (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-	const { name, email, password, password2, roll_no, course } = req.body;
+	const { name, email, password, password2, roll_no, course, semester } = req.body;
 	let errors = [];
 
-	if (!name || !email || !password || !password2 || !roll_no || !course) {
+	if (!name || !email || !password || !password2 || !roll_no || !course || !semester) {
 		errors.push({ msg: "Please enter all fields" });
 	}
 
@@ -47,7 +47,8 @@ router.post("/register", async (req, res) => {
 			password,
 			password2,
 			roll_no,
-			course
+      course,
+      semester
 		});
 	} else {
 		try {
@@ -59,7 +60,10 @@ router.post("/register", async (req, res) => {
 					name,
 					email,
 					password,
-					password2
+          password2,
+          roll_no,
+          course,
+          semester
 				});
 			} else {
 				const newUser = new User({
@@ -67,7 +71,9 @@ router.post("/register", async (req, res) => {
 					email,
 					password,
 					roll_no,
-					course
+          course,
+          semester,
+          is_examiner: false
 				});
 				try {
 					bcryptjs.genSalt(10, async (error, salt) => {
@@ -115,7 +121,7 @@ router.post("/login", (req, res, next) => {
 
 router.get("/logout", (req, res) => {
 	req.logout();
-	//req.flash('success_msg', 'You are logged out');
+	req.flash('success_msg', 'You are logged out');
 	res.redirect("/users/login");
 });
 
