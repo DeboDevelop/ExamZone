@@ -1,17 +1,18 @@
 require("dotenv").config();
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var expressLayouts = require("express-ejs-layouts");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const expressLayouts = require("express-ejs-layouts");
 const mongoose = require("mongoose");
 const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
+const STATIC_PATH = path.join(__dirname, "dist");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
 
 let DATABASE_URL;
 
@@ -21,7 +22,7 @@ if (process.env.mode == "development" || process.env.mode == "production") {
 	DATABASE_URL = process.env.DATABASE_URL;
 }
 
-var app = express();
+const app = express();
 
 // Passport Config
 require("./config/passport")(passport);
@@ -43,7 +44,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(STATIC_PATH));
 
 // Express session
 app.use(
@@ -61,7 +62,7 @@ app.use(passport.session());
 // Connect flash
 app.use(flash());
 
-// Global vars
+// Global consts
 app.use((req, res, next) => {
 	res.locals.success_msg = req.flash("success_msg");
 	res.locals.error_msg = req.flash("error_msg");
@@ -69,6 +70,11 @@ app.use((req, res, next) => {
 	next();
 });
 
+// routes for static files
+app.use("/", express.static(STATIC_PATH));
+app.use("/users", express.static(STATIC_PATH));
+
+// routes
 app.use(expressLayouts);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
