@@ -11,8 +11,9 @@ const session = require("express-session");
 const passport = require("passport");
 const STATIC_PATH = path.join(__dirname, "dist");
 
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
+var indexRouter = require("./routes/index");
+var usersRouter = require("./routes/users");
+var adminRouter = require("./routes/admin");
 
 let DATABASE_URL;
 
@@ -78,6 +79,7 @@ app.use("/users", express.static(STATIC_PATH));
 app.use(expressLayouts);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/admin", adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
