@@ -15,7 +15,7 @@ router.get("/login", forwardAuthenticated, (req, res) => {
     res.render("admin_login");
 });
 
-router.get("/register", forwardAuthenticated, (req, res) => {
+router.get("/register", ensureAuthenticated, (req, res) => {
     res.render("admin_register");
 });
 

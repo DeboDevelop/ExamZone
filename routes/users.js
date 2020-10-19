@@ -60,10 +60,10 @@ router.post("/register", async (req, res) => {
 					name,
 					email,
 					password,
-          password2,
-          roll_no,
-          course,
-          semester
+                    password2,
+                    roll_no,
+                    course,
+                    semester
 				});
 			} else {
 				const newUser = new User({
@@ -71,9 +71,9 @@ router.post("/register", async (req, res) => {
 					email,
 					password,
 					roll_no,
-          course,
-          semester,
-          is_examiner: false
+                    course,
+                    semester,
+                    is_examiner: false
 				});
 				try {
 					bcryptjs.genSalt(10, async (error, salt) => {
@@ -111,7 +111,7 @@ router.post("/register", async (req, res) => {
 });
 
 // Login
-router.post("/login", (req, res, next) => {
+router.post("/login", isStudent, (req, res, next) => {
 	passport.authenticate("local", {
 		successRedirect: "/users/dashboard",
 		failureRedirect: "/users/login",
@@ -124,5 +124,18 @@ router.get("/logout", (req, res) => {
 	req.flash('success_msg', 'You are logged out');
 	res.redirect("/users/login");
 });
+
+async function isStudent(req, res, next) {
+	let user = await User.findOne({email: req.body.email});
+	if(user == null || user.is_examiner == true) {
+		req.flash(
+			"error_msg",
+			"Invalid Admin!"
+		);
+		res.redirect("/users/login");
+	} else {
+		next();
+	}
+}
 
 module.exports = router;
