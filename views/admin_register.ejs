@@ -1,47 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
+<h1>Admin Registration</h1>
+<div>
+	<% if(typeof errors != 'undefined'){ %> <% errors.forEach(function(error) {
+	%> <%= error.msg %> <br />
+	<% }); %> <% } %>
+</div>
+<div>
+	<form action="/admin/register" method="POST">
+		<div>
+			<label for="name">Name</label>
+			<input type="text" id="name" name="name" placeholder="Enter Name" />
+		</div>
+		<div>
+			<label for="email">Email</label>
+			<input
+				type="email"
+				id="email"
+				name="email"
+				placeholder="Enter Email"
+			/>
+		</div>
+		<div>
+			<label for="password">Password</label>
+			<input
+				type="password"
+				id="password"
+				name="password"
+				placeholder="Create Password"
+			/>
+		</div>
+		<div>
+			<label for="password2">Confirm Password</label>
+			<input
+				type="password"
+				id="password2"
+				name="password2"
+				placeholder="Confirm Password"
+			/>
+		</div>
+		<div>
+			<label for="roll_no">Employee Code</label>
+			<input
+				type="text"
+				id="emp_code"
+				name="emp_code"
+				placeholder="Enter Employee Code"
+			/>
+		</div>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Register</title>
-</head>
-
-<body>
-    <h1>Admin Registration</h1>
-    <div>
-        <% if(typeof errors != 'undefined'){ %> <% errors.forEach(function(error)
-      { %> <%= error.msg %> <br />
-        <% }); %> <% } %>
-    </div>
-    <div>
-        <form action="/admin/register" method="POST">
-            <div>
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter Name" />
-            </div>
-            <div>
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter Email" />
-            </div>
-            <div>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Create Password" />
-            </div>
-            <div>
-                <label for="password2">Confirm Password</label>
-                <input type="password" id="password2" name="password2" placeholder="Confirm Password" />
-            </div>
-            <div>
-                <label for="roll_no">Employee Code</label>
-                <input type="text" id="emp_code" name="emp_code" placeholder="Enter Employee Code" />
-            </div>
-           
-           
-            <button type="submit">Register</button>
-        </form>
-        <p>Have An Account? <a href="/admin/login">Login</a></p>
-    </div>
-</body>
-
-</html>
+		<button type="submit">Register</button>
+	</form>
+	<p>Have An Account? <a href="/admin/login">Login</a></p>
+</div>
