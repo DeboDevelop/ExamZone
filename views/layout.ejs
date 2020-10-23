@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<title><%= locals.title %></title>
+		<link rel="stylesheet" href="main.css" />
+	</head>
 
-<head>
-    <title><%= locals.title %></title>
-    <link rel='stylesheet' href='main.css' />
-</head>
+	<body>
+		<main>
+			<%- body %>
+		</main>
 
-<body>
-    <main>
-        <%- body %>
-    </main>
-    <script src="main.js"></script>
-</body>
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"
+		></script>
+		<script src="main.js"></script>
+	</body>
 </html>

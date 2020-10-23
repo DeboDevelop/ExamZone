@@ -1,1 +1,1 @@
-console.log('main.js is ready!!');
+console.log("main.js is ready!!", $("body"));

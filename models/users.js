@@ -15,12 +15,24 @@ const userSchema = new mongoose.Schema({
   },
   roll_no: {
     type: String,
-    required: true,
+    default: "",
+  },
+  emp_code: {
+    type: String,
+    default: "",
   },
   course: {
     type: String,
-    required: true,
+    default: "",
   },
+  semester: {
+    type: Number,
+    default: 0,
+  },
+  is_examiner: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 module.exports = mongoose.model("User", userSchema);
