@@ -1,89 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Register</title>
-  </head>
-  <body>
-    <h1>Register</h1>
-    <div>
-      <% if(typeof errors != 'undefined'){ %> <% errors.forEach(function(error)
-      { %> <%= error.msg %> <br />
-      <% }); %> <% } %>
-    </div>
-    <div>
-      <form action="/users/register" method="POST">
-        <div>
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" placeholder="Enter Name" />
-        </div>
-        <div>
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter Email"
-          />
-        </div>
-        <div>
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Create Password"
-          />
-        </div>
-        <div>
-          <label for="password2">Confirm Password</label>
-          <input
-            type="password"
-            id="password2"
-            name="password2"
-            placeholder="Confirm Password"
-          />
-        </div>
-        <div>
-          <label for="roll_no">Roll No</label>
-          <input
-            type="text"
-            id="roll_no"
-            name="roll_no"
-            placeholder="Enter Roll No."
-          />
-        </div>
-        <div>
-          <label for="course">Course</label>
-          <select
-            id="course"
-            name="course"
-          >
-          <option>BCA</option>
-          <option>BBA</option>
-          <option>B.Tech</option>
-        </select>
-        </div>
-        <div>
-          <label for="semester">Semester</label>
-          <select
-            id="semester"
-            name="semester"
-          >
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>8</option>
-        </select>
-        </div>
-        <button type="submit">Register</button>
-      </form>
-      <p>Have An Account? <a href="/users/login">Login</a></p>
-    </div>
-  </body>
-</html>
+<h1>Register</h1>
+<div>
+	<% if(typeof errors != 'undefined'){ %> <% errors.forEach(function(error) {
+	%> <%= error.msg %> <br />
+	<% }); %> <% } %>
+</div>
+<div>
+	<form action="/users/register" method="POST">
+		<div>
+			<label for="name">Name</label>
+			<input type="text" id="name" name="name" placeholder="Enter Name" />
+		</div>
+		<div>
+			<label for="email">Email</label>
+			<input
+				type="email"
+				id="email"
+				name="email"
+				placeholder="Enter Email"
+			/>
+		</div>
+		<div>
+			<label for="password">Password</label>
+			<input
+				type="password"
+				id="password"
+				name="password"
+				placeholder="Create Password"
+			/>
+		</div>
+		<div>
+			<label for="password2">Confirm Password</label>
+			<input
+				type="password"
+				id="password2"
+				name="password2"
+				placeholder="Confirm Password"
+			/>
+		</div>
+		<div>
+			<label for="roll_no">Roll No</label>
+			<input
+				type="text"
+				id="roll_no"
+				name="roll_no"
+				placeholder="Enter Roll No."
+			/>
+		</div>
+		<div>
+			<label for="course">Course</label>
+			<select id="course" name="course">
+				<option>BCA</option>
+				<option>BBA</option>
+				<option>B.Tech</option>
+			</select>
+		</div>
+		<div>
+			<label for="semester">Semester</label>
+			<select id="semester" name="semester">
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+				<option>6</option>
+				<option>7</option>
+				<option>8</option>
+			</select>
+		</div>
+		<button type="submit">Register</button>
+	</form>
+	<p>Have An Account? <a href="/users/login">Login</a></p>
+</div>
