@@ -6,13 +6,14 @@ const passport = require("passport");
 const User = require("../models/users");
 
 const { ensureAuthenticated, forwardAuthenticated } = require("../config/admin_auth");
+const { getCommonAdminData } = require("./utils");
 
 router.get("/", forwardAuthenticated, (req, res) => {
     res.send("<h1>Admin Home Page</h1>");
 });
 
 router.get("/login", forwardAuthenticated, (req, res) => {
-    res.render("admin_login");
+    res.render("admin_login", getCommonAdminData(req, 'Admin Login'));
 });
 
 router.get("/register", ensureAuthenticated, (req, res) => {
@@ -20,7 +21,7 @@ router.get("/register", ensureAuthenticated, (req, res) => {
 });
 
 router.get("/dashboard", ensureAuthenticated, (req, res) => {
-    res.render("admin_dashboard");
+    res.render("admin_dashboard", getCommonAdminData(req, 'Admin Dashboard'));
 });
 
 router.post("/register", async (req, res) => {

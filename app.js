@@ -74,6 +74,7 @@ app.use((req, res, next) => {
 // routes for static files
 app.use("/", express.static(STATIC_PATH));
 app.use("/users", express.static(STATIC_PATH));
+app.use("/admin", express.static(STATIC_PATH));
 
 // routes
 app.use(expressLayouts);
