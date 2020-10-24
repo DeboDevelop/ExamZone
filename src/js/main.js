@@ -2,4 +2,4 @@ import $ from "jquery";
 import "bootstrap";
 import "popper.js";
 
-console.log("main.js is ready!!", $("body"));
+console.log("main.js is ready for go!!", $("body"));
