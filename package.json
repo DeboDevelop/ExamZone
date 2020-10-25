@@ -4,10 +4,13 @@
 	"private": true,
 	"scripts": {
 		"start": "node ./bin/www",
-		"build": "rm -rf dist && webpack -w",
+		"build": "rm -rf dist && webpack --env.mode=production",
+		
 		"startNodemon": "nodemon ./bin/www",
 		"backend": "concurrently 'npm:build' 'npm:startNodemon'",
-		"frontend": "concurrently 'npm:build' 'npm:start'"
+
+		"buildDevelopment": "rm -rf dist && webpack -w --env.mode=development",
+		"frontend": "concurrently 'npm:buildDevelopment' 'npm:start'"
 	},
 	"dependencies": {
 		"bcryptjs": "^2.4.3",
