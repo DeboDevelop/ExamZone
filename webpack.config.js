@@ -5,7 +5,6 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 
 module.exports = env => {
-	console.log("MODE ===>>>", env.mode);
 	const mode = env.mode;
 	let plugins = [
 		new MiniCssExtractPlugin({
