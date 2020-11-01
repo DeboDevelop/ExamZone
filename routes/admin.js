@@ -108,22 +108,25 @@ router.post("/register", async (req, res) => {
 // Login
 router.post("/login", (req, res, next) => {
     User.findOne({email: req.body.email}, (err, user)=>{
-        if(err) throw err;
-        else{
-            if (user.is_examiner == false || user == null) {
-                console.log(565555);
-                req.flash(
-                    "error_msg",
-                    "Invalid Admin!"
-                );
-                res.redirect("/admin/login");
-            }
+        if (user == null || user.is_examiner == false) {
+            console.log(565555);
+            req.flash(
+                "error_msg",
+                "Invalid Admin!"
+            );
+            res.redirect("/admin/login");
+        }
+        else if(user.is_examiner == true) {
+            passport.authenticate("local", {
+                successRedirect: "/admin/dashboard",
+                failureRedirect: "/admin/login",
+                failureFlash: true
+            })(req, res, next);
+        } else {
+            if(err) 
+                throw err;
             else {
-                passport.authenticate("local", {
-                    successRedirect: "/admin/dashboard",
-                    failureRedirect: "/admin/login",
-                    failureFlash: true
-                })(req, res, next);
+                res.redirect("/admin/login");
             }
         }
     })
